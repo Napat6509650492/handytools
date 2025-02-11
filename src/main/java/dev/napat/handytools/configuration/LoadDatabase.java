@@ -1,4 +1,4 @@
-package dev.napat.handytools.Configuration;
+package dev.napat.handytools.configuration;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,10 +11,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import dev.napat.handytools.Model.Item;
-import dev.napat.handytools.Model.Loan;
-import dev.napat.handytools.Repository.ItemRepository;
-import dev.napat.handytools.Repository.LoanRepository;
+import dev.napat.handytools.model.Item;
+import dev.napat.handytools.model.Loan;
+import dev.napat.handytools.repository.ItemRepository;
+import dev.napat.handytools.repository.LoanRepository;
 
 @Configuration
 public class LoadDatabase {

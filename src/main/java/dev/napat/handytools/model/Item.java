@@ -1,4 +1,4 @@
-package dev.napat.handytools.Model;
+package dev.napat.handytools.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
