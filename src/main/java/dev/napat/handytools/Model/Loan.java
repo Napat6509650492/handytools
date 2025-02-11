@@ -1,6 +1,8 @@
 package dev.napat.handytools.Model;
 
-import java.sql.Date;
+
+
+import java.util.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,20 +18,32 @@ public class Loan {
     @ManyToOne
     private Item item;
     private String borrowerName;
-    private String location;
+    private String before_Location;
+    private String after_Location;
+    private String use_Location;
     private Date loan_date;
     private Date return_date;
-
+    
     Loan(){}
 
-    public Loan(Item item, String borrowerName, String location, Date loan_date, Date return_date) {
+    public Loan(Item item, String borrowerName, String before_Location, String after_Location, String use_Location,
+            Date loan_date, Date return_date) {
         this.item = item;
         this.borrowerName = borrowerName;
-        this.location = location;
+        this.before_Location = before_Location;
+        this.after_Location = after_Location;
+        this.use_Location = use_Location;
         this.loan_date = loan_date;
         this.return_date = return_date;
     }
     
+    public String getUse_Location() {
+        return use_Location;
+    }
+
+    public void setUse_Location(String user_Location) {
+        this.use_Location = user_Location;
+    }
     public Long getId() {
         return id;
     }
@@ -44,11 +58,19 @@ public class Loan {
         this.loan_date = loan_date;
     }
 
-    public String getLocation() {
-        return location;
+    public String getAfter_Location() {
+        return after_Location;
     }
-    public void setLocation(String location) {
-        this.location = location;
+
+    public void setAfter_Location(String after_Location) {
+        this.after_Location = after_Location;
+    }
+
+    public String getBefore_Location() {
+        return before_Location;
+    }
+    public void setBefore_Location(String location) {
+        this.before_Location = location;
     }
 
     public String getBorrowerName() {
