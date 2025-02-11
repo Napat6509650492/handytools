@@ -15,11 +15,12 @@ public class LoadDatabase {
     public static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     @Bean
-    CommandLineRunner initDatabase(ItemRepository repository) {
+    CommandLineRunner initDatabase(ItemRepository itemrepository) {
+
         return args -> {
-            log.info("loading " + repository.save(new Item("hammer", "napat", "outside storage", false)));
-            log.info("loading " + repository.save(new Item("screwdriver", "napat", "toolbox 2nd floor", false)));
-            log.info("loading" + repository.save(new Item("paint brush", "napat", "paint cabinet", false)));
+            log.info("loading " + itemrepository.save(new Item("hammer", "napat", "outside storage", false)));
+            log.info("loading " + itemrepository.save(new Item("screwdriver", "napat", "toolbox 2nd floor", false)));
+            log.info("loading" + itemrepository.save(new Item("paint brush", "napat", "paint cabinet", false)));
         };
     }
 }
