@@ -6,8 +6,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import dev.napat.handytools.Model.Storage;
-import dev.napat.handytools.Repository.StorageRepository;
+import dev.napat.handytools.Model.Item;
+import dev.napat.handytools.Repository.ItemRepository;
 
 @Configuration
 public class LoadDatabase {
@@ -15,11 +15,11 @@ public class LoadDatabase {
     public static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     @Bean
-    CommandLineRunner initDatabase(StorageRepository repository) {
+    CommandLineRunner initDatabase(ItemRepository repository) {
         return args -> {
-            log.info("loading " + repository.save(new Storage("hammer", "kt", "outside storage", false, null)));
-            log.info("loading " + repository.save(new Storage("screwdriver", "kt", "toolbox 2nd floor", false, null)));
-            log.info("loading" + repository.save(new Storage("paint brush", "kt", "paint cabinet", false, null)));
+            log.info("loading " + repository.save(new Item("hammer", "napat", "outside storage", false)));
+            log.info("loading " + repository.save(new Item("screwdriver", "napat", "toolbox 2nd floor", false)));
+            log.info("loading" + repository.save(new Item("paint brush", "napat", "paint cabinet", false)));
         };
     }
 }
