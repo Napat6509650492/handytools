@@ -36,6 +36,13 @@ public class Loan {
         this.loan_date = loan_date;
         this.return_date = return_date;
     }
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
     
     public String getUse_Location() {
         return use_Location;
