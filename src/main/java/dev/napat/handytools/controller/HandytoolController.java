@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +38,11 @@ public class HandytoolController {
         return itemRepository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Optional<Item> findById(@PathVariable Long id) {
+        return itemRepository.findById(id);
+    }
+
     @GetMapping("/where/{id}")
     public String whereItem(@PathVariable Long id) {
         return itemRepository.findById(id).get().getLocation();
@@ -46,6 +50,7 @@ public class HandytoolController {
 
     @PostMapping("/add")
     public Item addNewItem(@RequestBody Item item){
+        item.setIsBorrowed(false);
         return itemRepository.save(item);
     }
 
@@ -58,11 +63,11 @@ public class HandytoolController {
 
         Item item = optionalItem.get();
 
-        if (item.getIsBorrower())
+        if (item.getIsBorrowed())
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Item is being borrowed");
         
         Loan loan = new Loan(item, request.getBorrowerName(), item.getLocation(), null, request.getUse_location(), new Date(), null);
-        item.setIsBorrower(true);
+        item.setIsBorrowed(true);
         item.setLocation(request.getUse_location());
 
         loanRepository.save(loan);
@@ -79,7 +84,7 @@ public class HandytoolController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Item not found");
 
         Item item = optionalItem.get();
-        if (!item.getIsBorrower())
+        if (!item.getIsBorrowed())
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("The item has not been borrowed yet.");
 
         Loan loan = loanRepository.findActiveLoans(id);
@@ -89,7 +94,7 @@ public class HandytoolController {
         loan.setAfter_Location(request.getLocation());
         loan.setReturn_date(new Date());
 
-        item.setIsBorrower(false);
+        item.setIsBorrowed(false);
         item.setLocation(request.getLocation());
 
         itemRepository.save(item);

@@ -3,16 +3,14 @@
 GET http://localhost:8080/handytools
 
 
-###
-POST http://localhost:8080/handytools
+### Add New Item
+POST http://localhost:8080/handytools/add
 Content-Type: application/json
 
 {
     "toolDetail": "cutter",
-    "ownerName": "kt",
-    "locationName": "office drawer",
-    "borrowed": false,
-    "borrowedName": null
+    "ownerName": "napat",
+    "location": "S2"
 }
 
 ###

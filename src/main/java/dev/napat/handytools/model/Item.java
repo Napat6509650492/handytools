@@ -10,46 +10,55 @@ public class Item {
     private String toolDetail;
     private String ownerName;    
     private String location;
-    private Boolean isBorrower;
+    private Boolean isBorrowed;
 
-    Item(){}
-    
-    public Item(String toolDetail, String ownerName, String location, Boolean isBorrower) {
-        this.toolDetail = toolDetail;
-        this.ownerName = ownerName;
-        this.location = location;
-        this.isBorrower = isBorrower;
-    }
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
+    public String getToolDetail() {
+        return toolDetail;
+    }
+
+    public void setToolDetail(String toolDetail) {
+        this.toolDetail = toolDetail;
+    }
+
     public String getOwnerName() {
         return ownerName;
     }
+
     public void setOwnerName(String ownerName) {
         this.ownerName = ownerName;
     }
-    public String getName() {
-        return toolDetail;
-    }
-    public void setName(String toolDetail) {
-        this.toolDetail = toolDetail;
-    }
+
     public String getLocation() {
         return location;
     }
+
     public void setLocation(String location) {
         this.location = location;
     }
-    public Boolean getIsBorrower() {
-        return isBorrower;
-    }
-    public void setIsBorrower(Boolean isBorrower) {
-        this.isBorrower = isBorrower;
+
+    public Boolean getIsBorrowed() {
+        return isBorrowed;
     }
 
+    public void setIsBorrowed(Boolean isBorrowed) {
+        this.isBorrowed = isBorrowed;
+    }
 
+    Item(){}
+    
+    public Item(String toolDetail, String ownerName, String location, Boolean isBorrowed) {
+        this.toolDetail = toolDetail;
+        this.ownerName = ownerName;
+        this.location = location;
+        this.isBorrowed = (isBorrowed != null) ? isBorrowed : false;
+    }
+    
 }
