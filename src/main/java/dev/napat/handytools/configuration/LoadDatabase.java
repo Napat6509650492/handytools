@@ -1,6 +1,5 @@
 package dev.napat.handytools.configuration;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
