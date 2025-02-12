@@ -23,7 +23,7 @@ import dev.napat.handytools.repository.ItemRepository;
 import dev.napat.handytools.repository.LoanRepository;
 
 @RestController
-@RequestMapping("/handytools")
+@RequestMapping("handytools")
 public class HandytoolController {
     private final ItemRepository itemRepository;
     private final LoanRepository loanRepository;
@@ -33,29 +33,35 @@ public class HandytoolController {
         this.loanRepository = loanRepository;
     }
     
-    @GetMapping("/")
+    @GetMapping("")
     public List<Item> findAll() {
         return itemRepository.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public Optional<Item> findById(@PathVariable Long id) {
         return itemRepository.findById(id);
     }
 
-    @GetMapping("/where/{id}")
+    @GetMapping("where/{id}")
     public String whereItem(@PathVariable Long id) {
         return itemRepository.findById(id).get().getLocation();
     }
 
-    @PostMapping("/add")
+    @GetMapping("history/{id}")
+    public ResponseEntity<List<Loan>> loanHistory(@PathVariable Long id) {
+        loanRepository.findByItemId(id);
+        return ResponseEntity.ok(loanRepository.findByItemId(id));
+    }
+
+    @PostMapping("add")
     public Item addNewItem(@RequestBody Item item){
         item.setIsBorrowed(false);
         return itemRepository.save(item);
     }
 
     // BorrowItem
-    @PutMapping("/borrow/{id}")
+    @PutMapping("borrow/{id}")
     public ResponseEntity<String> borrowItem(@RequestBody BorrowRequest request,@PathVariable Long id){
         Optional<Item> optionalItem = itemRepository.findById(id);
         if (optionalItem.isEmpty()) 
@@ -77,7 +83,7 @@ public class HandytoolController {
     }
 
     // return Item
-    @PutMapping("/return/{id}")
+    @PutMapping("return/{id}")
     public ResponseEntity<String> returnItem(@PathVariable Long id, @RequestBody ReturnItemRequest request) {
         Optional<Item> optionalItem = itemRepository.findById(id);
         if (optionalItem.isEmpty())

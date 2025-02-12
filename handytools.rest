@@ -1,7 +1,18 @@
-### 
+### Get All Item
 
 GET http://localhost:8080/handytools
 
+### Get Item By ID
+GET http://localhost:8080/handytools/1
+
+### Get InValid Item By ID
+GET http://localhost:8080/handytools/10
+
+### Get Item Location
+GET http://localhost:8080/handytools/where/1
+
+### Get Loan History 
+GET http://localhost:8080/handytools/history/2
 
 ### Add New Item
 POST http://localhost:8080/handytools/add
@@ -13,32 +24,39 @@ Content-Type: application/json
     "location": "S2"
 }
 
-###
-POST http://localhost:8080/handytools
+### Borrow an item
+PUT http://localhost:8080/handytools/borrow/1
 Content-Type: application/json
 
 {
-    "toolDetail": "drill",
-    "ownerName": "kt",
-    "locationName": "hanging at the barn's wall",
-    "borrowed": false,
-    "borrowedName": null
+  "borrowerName": "save",
+  "use_location": "R6"
 }
 
-###
-GET http://localhost:8080/handytools/99
-
-###
-PUT http://localhost:8080/handytools/1
+### Borrow an item that are being borrowed
+PUT http://localhost:8080/handytools/borrow/2
 Content-Type: application/json
 
 {
-    "toolDetail": "new tool name for #1",
-    "ownerName": "kt",
-    "locationName": "in the box under the desk",
-    "borrowed": false,
-    "borrowedName": null
+  "borrowerName": "save",
+  "use_location": "R3"
 }
 
-###
-DELETE http://localhost:8080/handytools/5
+### Return Item
+PUT http://localhost:8080/handytools/return/2
+Content-Type: application/json
+
+{
+  "location": "S3"
+}
+
+### Return The item that has not been borrowed
+PUT http://localhost:8080/handytools/return/3
+Content-Type: application/json
+
+{
+  "location": "S3"
+}
+
+### Delete an item
+DELETE http://localhost:8080/handytools/delete/1
