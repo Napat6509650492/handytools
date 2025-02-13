@@ -15,7 +15,10 @@ GET http://localhost:8080/handytools/where/1
 GET http://localhost:8080/handytools/where/10
 
 ### Get Loan History 
-GET http://localhost:8080/handytools/history/2
+GET http://localhost:8080/handytools/history/3
+
+### Get Loan History with Invalid Id
+GET http://localhost:8080/handytools/history/10
 
 ### Add New Item
 POST http://localhost:8080/handytools/add

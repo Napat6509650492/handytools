@@ -41,7 +41,7 @@ public class HandytoolController {
     @GetMapping("{id}")
     public ResponseEntity<Object> findById(@PathVariable Long id) {
         return itemRepository.findById(id)
-            .map((i)->ResponseEntity
+            .map(i->ResponseEntity
                     .ok()
                     .body((Object) i))
             .orElseGet(()->ResponseEntity
@@ -52,7 +52,7 @@ public class HandytoolController {
     @GetMapping("where/{id}")
     public ResponseEntity<String> whereItem(@PathVariable Long id) {
         return itemRepository.findById(id)
-            .map((i)->ResponseEntity
+            .map(i->ResponseEntity
                     .ok()
                     .body((String) i.getLocation()))
             .orElseGet(()->ResponseEntity
@@ -61,9 +61,14 @@ public class HandytoolController {
     }
 
     @GetMapping("history/{id}")
-    public ResponseEntity<List<Loan>> loanHistory(@PathVariable Long id) {
-        loanRepository.findByItemId(id);
-        return ResponseEntity.ok(loanRepository.findByItemId(id));
+    public ResponseEntity<Object> loanHistory(@PathVariable Long id) {
+        return itemRepository.findById(id)
+            .map(i->ResponseEntity
+                    .ok()
+                    .body((Object) loanRepository.findByItemId(id)))
+            .orElseGet(()->ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Item ID " + id + " Not Found"));
     }
 
     @PostMapping("add")
