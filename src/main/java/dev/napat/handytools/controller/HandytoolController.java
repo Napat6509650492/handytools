@@ -79,7 +79,7 @@ public class HandytoolController {
 
     // BorrowItem
     @PutMapping("borrow/{id}")
-    public ResponseEntity<String> borrowItem(@RequestBody BorrowRequest request,@PathVariable Long id){
+    public ResponseEntity<Object> borrowItem(@RequestBody BorrowRequest request,@PathVariable Long id){
         Optional<Item> optionalItem = itemRepository.findById(id);
         if (optionalItem.isEmpty()) 
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Item not found");
@@ -96,7 +96,7 @@ public class HandytoolController {
         loanRepository.save(loan);
         itemRepository.save(item);
 
-        return ResponseEntity.status(HttpStatus.OK).body("Item borrowed successfully");
+        return ResponseEntity.status(HttpStatus.OK).body(item);
     }
 
     // return Item
