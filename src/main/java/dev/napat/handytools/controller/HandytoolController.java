@@ -39,8 +39,12 @@ public class HandytoolController {
     }
 
     @GetMapping("{id}")
-    public Optional<Item> findById(@PathVariable Long id) {
-        return itemRepository.findById(id);
+    public ResponseEntity<Object> findById(@PathVariable Long id) {
+        return itemRepository.findById(id)
+            .map((item)->ResponseEntity.ok().body((Object) item))
+            .orElseGet(()->ResponseEntity
+                            .status(HttpStatus.NOT_FOUND)
+                            .body("Item ID " + id + " Not Found"));
     }
 
     @GetMapping("where/{id}")
