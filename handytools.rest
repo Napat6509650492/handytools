@@ -11,6 +11,9 @@ GET http://localhost:8080/handytools/10
 ### Get Item Location
 GET http://localhost:8080/handytools/where/1
 
+### Get Item Location With Invalid ID
+GET http://localhost:8080/handytools/where/10
+
 ### Get Loan History 
 GET http://localhost:8080/handytools/history/2
 

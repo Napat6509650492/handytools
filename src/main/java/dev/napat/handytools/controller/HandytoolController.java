@@ -41,15 +41,23 @@ public class HandytoolController {
     @GetMapping("{id}")
     public ResponseEntity<Object> findById(@PathVariable Long id) {
         return itemRepository.findById(id)
-            .map((item)->ResponseEntity.ok().body((Object) item))
+            .map((i)->ResponseEntity
+                    .ok()
+                    .body((Object) i))
             .orElseGet(()->ResponseEntity
-                            .status(HttpStatus.NOT_FOUND)
-                            .body("Item ID " + id + " Not Found"));
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Item ID " + id + " Not Found"));
     }
 
     @GetMapping("where/{id}")
-    public String whereItem(@PathVariable Long id) {
-        return itemRepository.findById(id).get().getLocation();
+    public ResponseEntity<String> whereItem(@PathVariable Long id) {
+        return itemRepository.findById(id)
+            .map((i)->ResponseEntity
+                    .ok()
+                    .body((String) i.getLocation()))
+            .orElseGet(()->ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Item ID " + id + " Not Found"));
     }
 
     @GetMapping("history/{id}")
