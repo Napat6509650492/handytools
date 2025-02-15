@@ -39,7 +39,7 @@ public class HandytoolController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Object> findById(@PathVariable Long id) {
+    public ResponseEntity<?> findById(@PathVariable Long id) {
         return itemRepository.findById(id)
             .map(i->ResponseEntity
                     .ok()
@@ -61,7 +61,7 @@ public class HandytoolController {
     }
 
     @GetMapping("history/{id}")
-    public ResponseEntity<Object> loanHistory(@PathVariable Long id) {
+    public ResponseEntity<?> loanHistory(@PathVariable Long id) {
         return itemRepository.findById(id)
             .map(i->ResponseEntity
                     .ok()
@@ -79,7 +79,7 @@ public class HandytoolController {
 
     // BorrowItem
     @PutMapping("borrow/{id}")
-    public ResponseEntity<Object> borrowItem(@RequestBody BorrowRequest request,@PathVariable Long id){
+    public ResponseEntity<?> borrowItem(@RequestBody BorrowRequest request,@PathVariable Long id){
         Optional<Item> optionalItem = itemRepository.findById(id);
         if (optionalItem.isEmpty()) 
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Item not found");
